@@ -1,11 +1,11 @@
 defmodule ImageFinder.Supervisor do
   use Supervisor
 
-  def start_link do
-    Supervisor.start_link(__MODULE__, :ok, name: __MODULE__)
+  def start_link(init_arg) do
+    Supervisor.start_link(__MODULE__, init_arg, name: __MODULE__)
   end
 
-  def init(:ok) do
+  def init(_init_arg) do
     children = [
       %{id: ImageFinder.Worker, start: {ImageFinder.Worker, :start_link, [Worker1]}, restart: :transient},
     ]

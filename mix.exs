@@ -3,10 +3,10 @@ defmodule ImageFinder.Mixfile do
 
   def project do
     [app: :image_finder,
-     version: "0.0.1",
-     elixir: "~> 1.10",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
+     version: "0.0.2",
+     elixir: "~> 1.14",
+     build_embedded: Mix.env() == :prod,
+     start_permanent: Mix.env() == :prod,
      deps: deps()]
   end
 
@@ -14,7 +14,7 @@ defmodule ImageFinder.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :tesla],
+    [applications: [:logger, :tesla, :wx, :observer, :runtime_tools],
      mod: {ImageFinder, []}]
   end
 

@@ -3,7 +3,7 @@ defmodule ImageFinder do
 
   def start(_type, _args) do
     name_application()
-    ImageFinder.Supervisor.start_link
+    ImageFinder.Supervisor.start_link(:ok)
   end
 
   def name_application() do
