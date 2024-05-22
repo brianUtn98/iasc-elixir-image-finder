@@ -48,10 +48,10 @@ Este proyecto funciona, pero tiene algunos problemas notables:
 El primer objetivo es mejorar el diseño del módulo `ImageFinder`, separando convenintemente las tareas en diferentes actores, y diseñando una jerarquía de supervisión adecuada.
 
 Recomendamos ir solucionando los problemas mencionados anteriormente de a uno. Por ejemplo:
-* ir descargando links a medida que se leen del archivo (en vez de esperar a que se termine de leer completamente)
 * descargar más de una imagen en simultaneo (se pueden ir descargando sin límite a medida que se obtienen los links, o tener cierta cantidad fija de descargas "en paralelo")
 * asegurarse de que el error en una descarga no haga fallar todo el proceso
 * poder invocar a nuestro módulo varias veces con varios archivos distintos, aún cuando el proceso anterior no se haya terminado de ejecutar
+* ir descargando links a medida que se leen del archivo (en vez de esperar a que se termine de leer completamente)
 
 ### Segunda parte
 
