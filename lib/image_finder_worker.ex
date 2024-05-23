@@ -10,24 +10,24 @@ defmodule ImageFinder.Worker do
   end
 
   def handle_call({:fetch, source_file, target_directory}, _from, state) do
-    content = File.read! source_file
+    content = File.read!(source_file)
     regexp = ~r/http(s?)\:.*?\.(png|jpg|gif)/
-    Regex.scan(regexp, content)
-      |> Enum.map(&List.first/1)
-      |> Enum.map(&(fetch_link &1, target_directory))
+    scanResult = Regex.scan(regexp, content)
+    links = Enum.map(scanResult, fn [match | _] -> match end)
+    Enum.map(links, fn link -> fetch_link(link, target_directory) end)
     {:reply, :ok, state}
   end
 
   def fetch_link(link, target_directory) do
     {:ok, response} = Tesla.get(link)
-    response.body  |> save(target_directory)
+    response.body |> save(target_directory)
   end
 
   def digest(body) do
-    :crypto.hash(:md5 , body) |> Base.encode16()
+    :crypto.hash(:md5, body) |> Base.encode16()
   end
 
   def save(body, directory) do
-    File.write! "#{directory}/#{digest(body)}", body
+    File.write!("#{directory}/#{digest(body)}", body)
   end
 end
